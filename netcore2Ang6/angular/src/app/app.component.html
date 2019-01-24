@@ -1,0 +1,125 @@
+<span *ngIf="usuario?.nome">
+    <header class="header">
+        <span class="header-logo">
+            &nbsp;
+        </span>
+
+        <div class="header-icons">
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="header-icons-action" uib-tooltip="Sair" tooltip-placement="bottom">
+                        <a (click)="logout()"> <i class="fas fa-sign-out-alt"></i> </a>
+                    </a>
+                </li>
+            </ul>
+
+            <button type="button" (click)="sidebarToggle()" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <aside id="sidebar">
+        <ul class="sidebar-menu">
+            <li class="sidebar-user">
+                <span class="sidebar-link">
+                    <i class="sidebar-icon fas fa-user-circle"></i>
+                    {{usuario?.nome}}
+                </span>
+            </li>
+
+            <li>
+                <a routerLink="clientes" class="sidebar-link">
+                    <i class="sidebar-icon fas fa-user"></i>
+                    Clientes
+                </a>
+            </li>
+
+            <li>
+                <a class="sidebar-link">
+                    <i class="sidebar-icon fas fa-notes-medical"></i>
+                    Tratamentos
+                </a>
+            </li>
+
+            <li>
+                <a class="sidebar-link">
+                    <i class="sidebar-icon fas fa-calendar-check"></i>
+                    Acompanhamento
+                </a>
+            </li>
+
+            <li>
+                <a class="sidebar-link">
+                    <i class="sidebar-icon fas fa-bullseye"></i>
+                    Objetivo
+                </a>
+            </li>
+
+            <li>
+                <a class="sidebar-link">
+                    <i class="sidebar-icon fas fa-money-check-alt"></i>
+                    Vendas
+                </a>
+            </li>
+
+            <li class="sidebar-dropdown">
+                <span class="sidebar-link" data-toggle="collapse" data-target="#sidebar-menu-1">
+                    <i class="sidebar-icon fas fa-cog"></i>
+                    Configurações
+                </span>
+                <ul id="sidebar-menu-1" class="sidebar-submenu collapse">
+                    <li>
+                        <a routerLink="#" class="sidebar-submenu-link">
+                            Trocar Senha
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="usuarios" class="sidebar-submenu-link">
+                            Usuários
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="medidas" class="sidebar-submenu-link">
+                            Medidas
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="campanhas" class="sidebar-submenu-link">
+                            Campanhas
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="produtos" class="sidebar-submenu-link">
+                            Produtos
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="#" class="sidebar-submenu-link">
+                            Indicadores
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="funcionarios" class="sidebar-submenu-link">
+                            Funcionários
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="avisos" class="sidebar-submenu-link">
+                            Alertas
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+    </aside>
+    <main>
+        <router-outlet></router-outlet>
+    </main>
+</span>
+
+<span *ngIf="!usuario?.nome">
+    <router-outlet></router-outlet>
+</span>

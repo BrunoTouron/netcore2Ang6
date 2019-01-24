@@ -1,0 +1,174 @@
+<h1 class="title">
+  Cadastro de Cliente
+</h1>
+<div class="card nopadding">
+  <div class="card-body">
+
+    <form [formGroup]="formCadastro" (ngSubmit)="save()">
+      <crm-message type="danger" *ngIf="errorMessage">
+        {{errorMessage}}
+      </crm-message>
+
+      <div class="row">
+
+        <div class="form-group col-lg-10">
+          <label for="name">Nome:</label>
+          <input #nomeInput formControlName="nome" required name="nome" type="text" class="form-control" upperCase>
+          <crm-message type="danger" *ngIf="formCadastro.controls.nome.invalid && showMessages">
+            Campo obrigatório
+          </crm-message>
+        </div>
+
+        <div class="form-group col-lg-2">
+          <label for="sexo">Sexo:</label>
+          <select formControlName="sexo" required name="sexo" class="form-control">
+            <option value="">Selecione</option>
+            <option value="Feminino">Feminino</option>
+            <option value="Masculino">Masculino</option>
+          </select>
+          <crm-message type="danger" *ngIf="formCadastro.controls.sexo.invalid && showMessages">
+            Campo obrigatório
+          </crm-message>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="form-group col-lg-10">
+          <label for="endereco">Endereco:</label>
+          <input formControlName="endereco" required name="endereco" type="text" class="form-control" upperCase>
+          <crm-message type="danger" *ngIf="formCadastro.controls.endereco.invalid && showMessages">
+            Campo obrigatório
+          </crm-message>
+        </div>
+
+        <div class="form-group col-lg-2">
+          <label for="cep">Cep:</label>
+          <input formControlName="cep" type="text" required name="cep" class="form-control" mask="00000-000">
+          <crm-message type="danger" *ngIf="formCadastro.controls.cep.invalid && showMessages">
+            Campo obrigatório
+          </crm-message>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="form-group col-lg-4">
+          <label for="cpf">CPF:</label>
+          <input formControlName="cpf" type="text" required name="cpf" class="form-control" mask="000.000.000-00" [(ngModel)]="cpf"
+            [cpf]="cpf">
+          <crm-message type="danger" *ngIf="formCadastro.controls.cpf.invalid && showMessages">
+            CPF inválido
+          </crm-message>
+        </div>
+
+        <div class="form-group col-lg-2">
+          <label for="dataNascimento">Data nascimento:</label>
+          <input formControlName="dataNascimento" required name="dataNascimento" type="date" class="form-control">
+          <crm-message type="danger" *ngIf="formCadastro.controls.dataNascimento.invalid && showMessages">
+            Campo obrigatório
+          </crm-message>
+        </div>
+
+        <div class="form-group col-lg-6">
+          <label for="Profissao">Profissão:</label>
+          <input formControlName="profissao" type="text" class="form-control" upperCase>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="form-group col-lg-2">
+          <label for="telCel">Tel celular:</label>
+          <input formControlName="telCel" type="tel" class="form-control" mask="(00) 00000-0000">
+        </div>
+
+        <div class="form-group col-lg-2">
+          <label for="telRes">Tel residencial:</label>
+          <input formControlName="telRes" type="tel" class="form-control" mask="(00) 0000-0000">
+        </div>
+
+        <div class="form-group col-lg-2">
+          <label for="estadoCivil">Estado civil:</label>
+          <select formControlName="estadoCivil" class="form-control">
+            <option value="">Selecione</option>
+            <option value="Solteiro(a)">Solteiro(a)</option>
+            <option value="Casado(a)">Casado(a)</option>
+            <option value="Separado(a)">Separado(a)</option>
+            <option value="Divorciado(a)">Divorciado(a)</option>
+            <option value="Viúvo(a)">Viúvo(a)</option>
+          </select>
+        </div>
+
+        <div class="form-group col-lg-6">
+          <label for="midiaId">Como nos conheceu ?</label>
+          <br>
+          <select formControlName="midiaId" class="form-control" required name="midiaId">
+            <option *ngFor="let midia of midias" [value]="midia.id" [text]="midia.descricao" [selected]="model.midiaId == midia.id"></option>
+          </select>
+          <crm-message type="danger" *ngIf="formCadastro.controls.midiaId.invalid && showMessages">
+            Campo obrigatório
+          </crm-message>
+        </div>
+
+      </div>
+
+
+
+      <div class="row">
+
+        <div class="form-group col-lg-12">
+          <label for="email">Email:</label>
+          <input formControlName="email" type="email" class="form-control" ngModel email="true" upperCase>
+          <!--<input formControlName="email" type="text" class="form-control" name="email" [(ngModel)]="model.email" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
+            required email />
+          <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+            <div *ngIf="email.errors.required">Email is required</div>
+            <div *ngIf="email.errors.email">Email must be a valid email address</div>
+          </div>-->
+          <crm-message type="danger" *ngIf="formCadastro.controls.email.invalid && showMessages">
+            Email inválido
+          </crm-message>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="form-group col-lg-12">
+          <label for="instagram">Instagram:</label>
+          <input formControlName="instagram" type="text" class="form-control" upperCase>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="form-group col-lg-2">
+          <label for="dataUltimoServico">Data último serviço:</label>
+          <input formControlName="dataUltimoServico" name="dataUltimoServico" type="date" class="form-control">
+        </div>
+
+        <div class="form-group col-lg-3">
+          <label for="bloqueado"></label>
+          <br>
+          <br>
+          <input formControlName="bloqueado" name="bloqueado" type="checkbox" selected="model.bloqueado"> Bloqueado?
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="form-group col-lg-12">
+          <label for="observacao">Observação:</label>
+          <input formControlName="observacao" type="tel" class="form-control" upperCase>
+        </div>
+
+      </div>
+
+      <a routerLink="/clientes" class="btn btn-danger">Cancelar</a> &nbsp;
+      <button class="btn btn-primary" type="submit">Salvar</button>
+    </form>
+  </div>
+</div>

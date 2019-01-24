@@ -1,0 +1,35 @@
+<div class="container" align="center">
+
+  <div class="row">
+    <div class="form-group col-lg-12">
+    </div>    
+  </div>
+  <div class="row">
+    <div class="form-group col-lg-12">
+    </div>    
+  </div>
+
+  <img src="../../assets/logo-login.png" alt="logotipo">
+
+  <form [formGroup]="formLogin" (ngSubmit)="login()">
+    <crm-message type="danger" *ngIf="errorMessage">
+      {{errorMessage}}
+    </crm-message>
+    <div class="form-group col-lg-4">
+      <label for="usuario">Usuário:</label>
+      <input formControlName="usuario" required name="usuario" type="text" class="form-control" upperCase>
+      <crm-message type="danger" *ngIf="formLogin.controls.usuario.invalid && showMessages">
+        Campo obrigatório
+      </crm-message>
+    </div>
+    <div class="form-group col-lg-4">
+      <label for="senha">Senha:</label>
+      <input formControlName="senha" required name="senha" type="password" class="form-control">
+      <crm-message type="danger" *ngIf="formLogin.controls.senha.invalid && showMessages">
+        Campo obrigatório
+      </crm-message>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Entrar</button>
+  </form>
+</div>

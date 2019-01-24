@@ -1,0 +1,21 @@
+input[type="date"]{
+    padding: 5px;
+    outline: none;
+    height: 37px;
+  }
+  input[type="date"]::-webkit-clear-button {
+      font-size: 18px;
+      /*height: 30px;*/
+      position: relative;
+  
+    }
+   input[type="date"]::-webkit-inner-spin-button {
+      /*height: 28px;*/
+      visibility:hidden;
+    }
+  
+    input[type="date"]::-webkit-calendar-picker-indicator{
+      font-size: 15px;
+  
+  
+     }

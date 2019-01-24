@@ -1,0 +1,75 @@
+<h1 class="title">
+  Visualização de Cliente
+</h1>
+<div class="card nopadding">
+  <div class="card-body">
+    <div class="row">
+      <div class="form-group col-lg-10">
+        <b>Nome:</b> <br> {{model['nome']}}
+      </div>
+      <div class="form-group col-lg-2">
+        <b>Sexo:</b> <br> {{model['sexo']}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-lg-10">
+        <b>Endereço:</b> <br> {{model['endereco']}}
+      </div>
+      <div class="form-group col-lg-2">
+        <b>Cep:</b> <br> {{model['cep'] | mask: '00000-000'}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-lg-4">
+        <b>CPF:</b> <br> {{model['cpf'] | mask: '000.000.000-00'}}
+      </div>
+      <div class="form-group col-lg-2">
+        <b>Data nascimento:</b> <br> {{model['dataNascimento'] | date:'dd/MM/yyyy'}}
+      </div>
+      <div class="form-group col-lg-6">
+        <b>Profissão:</b> <br> {{model['profissao']}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-lg-2">
+        <b>Tel celular:</b> <br> {{model['telCel'] | mask: '(00) 00000-0000'}}
+      </div>
+      <div class="form-group col-lg-2">
+        <b>Tel residencial:</b> <br> {{model['telRes'] | mask: '(00) 0000-0000'}}
+      </div>
+      <div class="form-group col-lg-2">
+        <b>Estado civil:</b> <br> {{model['estadoCivil']}}
+      </div>
+      <div class="form-group col-lg-6">
+          <b>Como nos conheceu ?:</b> <br> {{model['midia']['descricao']}}
+        </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-lg-12">
+        <b>Email:</b> <br> {{model['email']}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-lg-12">
+        <b>Instagram:</b> <br> {{model['instagram']}}
+      </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-2">
+          <b>Data Último Serviço:</b> <br> {{model['dataUltimoServico'] | date:'dd/MM/yyyy'}}
+        </div>
+        <div class="form-group col-lg-4">
+            <br>
+            <label *ngIf="model['bloqueado']">Bloqueado</label>
+            <label *ngIf="!model['bloqueado']">Ativo</label>
+        </div>
+      </div>
+    <div class="row">
+      <div class="form-group col-lg-12">
+        <b>Observação:</b> <br> {{model['observacao']}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<a routerLink="/clientes" class="btn btn-info">Voltar</a>

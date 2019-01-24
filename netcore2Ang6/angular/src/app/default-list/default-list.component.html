@@ -1,0 +1,95 @@
+<h1 class="title">
+    {{title}}
+</h1>
+
+<button (click)="newRegister()" class="btn btn-success btn-add btn-icon">
+    <i class="fas fa-plus"></i>
+    Novo
+</button>
+
+<br>
+<div class="card nopadding">
+    <div class="card-body">
+        <multe-message type="danger" *ngIf="errorMessage">
+            {{errorMessage}}
+        </multe-message>
+        <multe-message type="info" *ngIf="loading">
+            Carregando...
+        </multe-message>
+        <div class="row u-align-bottom" *ngIf="hasFilter">
+            <ng-content></ng-content>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <tr>
+                <th *ngFor="let label of labelsList">
+                    {{label}}
+                </th>
+                <th></th>
+            </tr>
+            <tr *ngFor="let value of values | paginate: { itemsPerPage: 10, currentPage: page };">
+                <td *ngFor="let field of fieldsList; index as i">
+                    <span *ngIf="masksList.length == 0">{{value[field]}}</span>
+                    <span *ngIf="masksList.length > 0">
+                        <span *ngIf="masksList[i] == ''">{{value[field]}}</span>
+                        <span *ngIf="masksList[i] == 'cpf'">
+                            {{value[field] | mask: '000.000.000-00'}}
+                        </span>
+                        <span *ngIf="masksList[i] == 'cep'">
+                            {{value[field] | mask: '00000-000'}}
+                        </span>
+                        <span *ngIf="masksList[i] == 'telefone9digitos'">
+                            {{value[field] | mask: '(00) 00000-0000'}}
+                        </span>
+                        <span *ngIf="masksList[i] == 'telefone8digitos'">
+                            {{value[field] | mask: '(00) 0000-0000'}}
+                        </span>
+                        <span *ngIf="masksList[i] == 'Ativo'">
+                            <label *ngIf="value[field].toString() == 'true'">Ativo</label>
+                            <label *ngIf="value[field].toString() == 'false'">Inativo</label>
+                        </span>
+                        <span *ngIf="masksList[i] == 'moeda'">
+                            {{value[field] | currency: 'BRL'}}
+                        </span>
+                        <span *ngIf="masksList[i] == 'servico'">
+                            <label *ngIf="value[field].toString() == 'true'">Serviço</label>
+                            <label *ngIf="value[field].toString() == 'false'">Produto</label>
+                        </span>
+                    </span>
+                    <span *ngIf="masksList[i] == 'Data'">                        
+                        <label *ngIf="value[field] != '1970-01-01T00:00:00'">{{value[field] | date:'dd/MM/yyyy'}}</label>
+                    </span>
+                    <span *ngIf="masksList[i] == 'Cliente'">
+                        {{value['cliente']['nome']}}
+                    </span>
+                </td>
+                <td class="action-buttons">
+                    <button (click)="preview(value.id)" class=" btn btn-default btn-circle">
+                        <i class="fas fa-search"></i>
+                    </button>
+
+                    <button (click)="edit(value.id)" class=" btn btn-default btn-circle">
+                        <i class="fas fa-pen"></i>
+                    </button>
+
+                    <button (click)="openModalConfirmationDelete(confirmaExclusao, value.id)" class=" btn btn-default btn-circle">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <div style="text-align: center">
+            <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Próxima"></pagination-controls>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #confirmaExclusao>
+    <div class="modal-body text-center">
+        <p>Confirma a exclusão do registro?</p>
+        <button type="button" class="btn btn-default" (click)="confirmDelete()">Sim</button>
+        <button type="button" class="btn btn-primary" (click)="declineDelete()">Não</button>
+    </div>
+</ng-template>
